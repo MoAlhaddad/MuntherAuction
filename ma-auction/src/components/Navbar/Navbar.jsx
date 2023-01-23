@@ -45,7 +45,10 @@ const Navbar = () => {
             <Link className ="link" to="/">About</Link>
           </div>
           <div className="item">
-            <Link className ="link" to="/">Contact</Link>
+            <Link className ="link" to="/sign-up">SignUp</Link>
+          </div>
+          <div className="item">
+            <Link className ="link" to="/">Locations</Link>
           </div>
         
           <div className="icons">
