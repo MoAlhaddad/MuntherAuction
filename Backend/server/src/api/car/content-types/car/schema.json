@@ -1,0 +1,59 @@
+{
+  "kind": "collectionType",
+  "collectionName": "cars",
+  "info": {
+    "singularName": "car",
+    "pluralName": "cars",
+    "displayName": "Car",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Make": {
+      "type": "string",
+      "default": "Make"
+    },
+    "Model": {
+      "type": "string"
+    },
+    "Year": {
+      "type": "decimal"
+    },
+    "Mileage": {
+      "type": "biginteger"
+    },
+    "SellerType": {
+      "type": "text"
+    },
+    "Dealer": {
+      "type": "json"
+    },
+    "AskingPrice": {
+      "type": "decimal"
+    },
+    "StartingBid": {
+      "type": "decimal"
+    },
+    "Photos": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "Title": {
+      "type": "enumeration",
+      "enum": [
+        "Clean",
+        "Salvage"
+      ]
+    }
+  }
+}

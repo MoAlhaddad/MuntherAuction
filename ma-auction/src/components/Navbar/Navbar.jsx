@@ -1,0 +1,64 @@
+import React, { useState } from "react";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import SearchIcon from "@mui/icons-material/Search";
+import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import { Link } from "react-router-dom";
+import "./Navbar.scss"
+
+import { useSelector } from "react-redux";
+
+const Navbar = () => {
+  
+
+  return (
+    <div className="navbar">
+      <div className="wrapper">
+        <div className="left">
+          <div className="item">
+           
+            <KeyboardArrowDownIcon />
+          </div>
+          <div className="item">
+            <span>USD</span>
+            <KeyboardArrowDownIcon />
+          </div>
+          <div className="item">
+            <Link className ="link" to="/cars/1">New Pickups</Link>
+          </div>
+          <div className="item">
+            <Link className ="link" to="/cars/2">Categories</Link>
+          </div>
+          <div className="item">
+            <Link className ="link" to="/products/3">Auction Dates</Link>
+          </div>
+        </div>
+        <div className="center">
+          <Link className ="link" to="/">MunthersAutoStore</Link>
+        </div>
+        <div className="right">
+          <div className="item">
+            <Link className ="link" to="/">Homepage</Link>
+          </div>
+          <div className="item">
+            <Link className ="link" to="/">About</Link>
+          </div>
+          <div className="item">
+            <Link className ="link" to="/">Contact</Link>
+          </div>
+        
+          <div className="icons">
+            <SearchIcon/>
+            <PersonOutlineOutlinedIcon/>
+            <FavoriteBorderOutlinedIcon/>
+          
+          </div>
+        </div>
+      </div>
+    
+    </div>
+  );
+};
+
+export default Navbar;
