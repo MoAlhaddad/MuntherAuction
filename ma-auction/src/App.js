@@ -1,20 +1,43 @@
-import { createBrowserRouter, RouterProvider, Outlet, Router } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Outlet,
+  Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
 import Home from "./pages/Home/Home";
-import Footer from "./components/Footer/Footer";
+
 import Navbar from "./components/Navbar/Navbar";
 import Cars from "./pages/Cars/Cars";
 import Car from "./pages/Car/Car";
+
 import SignUp from "./pages/SignUp/sign-up";
 import { AuthProvider } from "./contexts/AuthContext";
 // import { AuthProvider } from "./contexts/AuthContext";
+// import AuthLayout from "./components/Layout/AuthLayout";
+
+import "./App.css";
+
+import React from "react";
+
+import Footer from "./components/Footer/Footer";
+import Login from "./pages/SignUp/sign-in";
+import AuthLayout from "./components/Layout/AuthLayout";
 
 const Layout = () => {
+
+
+
   return (
     <div className="app">
       <AuthProvider>
-      <Navbar />
-      <Outlet />
-      <Footer />
+        <AuthLayout>
+        <Navbar />
+        <Outlet />
+        <Footer />
+        </AuthLayout>
       </AuthProvider>
     </div>
   );
@@ -39,8 +62,12 @@ const router = createBrowserRouter([
       },
       {
         path: "/sign-up",
-        element: <SignUp />
-      }
+        element: <SignUp />,
+      },
+      {
+        path: "/sign-in",
+        element: <Login />,
+      },
     ],
   },
 ]);
@@ -48,11 +75,8 @@ const router = createBrowserRouter([
 function App() {
   return (
     <div>
-      
       <RouterProvider router={router} />
-     
     </div>
-    
   );
 }
 
