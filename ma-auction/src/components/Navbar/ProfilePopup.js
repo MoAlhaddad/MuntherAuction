@@ -1,16 +1,23 @@
 import { useAuth } from "../../contexts/AuthContext";
 import React, { useRef, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { auth } from "../../firebase";
+
 // import { getInfo } from "../../API/User";
 
-export default function ProfilePopup({ userInfo, alerter }) {
-  const { logout, currentUser } = useAuth();
+export default function ProfilePopup() {
+  const {userInfo, logout, currentUser} = useAuth();
+
   
   const [userCalledInfo, setUserCalledInfo] = useState();
   const wrapperRef = useRef(null);
   const navigate = useNavigate();
+  const userRef = useRef(useAuth);
+
   
-  alerter(wrapperRef);
+
+  setUserCalledInfo(currentUser);
+  // alerter(wrapperRef);
 
   let profileImg = "";
 
@@ -31,7 +38,7 @@ export default function ProfilePopup({ userInfo, alerter }) {
   // }, [])
 
   return (
-    <div className="profile-popup" ref={wrapperRef}>
+    <div className="profile-popup" >
       <div className="popup-user">
         <img src={profileImg} alt="ProfileImage" />
         <div className="profile-metadata">
@@ -56,7 +63,7 @@ export default function ProfilePopup({ userInfo, alerter }) {
       <div className="popup-options">
         <p>Help</p>
 
-        <button onClick={() => logout()}>Sign Out</button>
+        <p>Logout</p>
       </div>
     </div>
   );

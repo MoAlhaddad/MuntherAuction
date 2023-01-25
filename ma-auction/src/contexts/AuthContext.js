@@ -1,9 +1,9 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useReducer } from "react";
 
 import { auth } from "../firebase";
 import { useNavigate } from "react-router-dom";
 
-const AuthContext = React.createContext();
+const AuthContext = React.createContext({});
 
 export function useAuth() {
   return useContext(AuthContext);
@@ -11,10 +11,28 @@ export function useAuth() {
 
 //Firebase auth functions that provide navigation depending on function
 
-export function AuthProvider({ children }) {
-  const [currentUser, setCurrentUser] = useState();
-  const [loading, setLoading] = useState(true);
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "LOGIN":
+      return { ...state, user: action.payload };
+    case "LOGOUT":
+      return { ...state, user: null };
+    default:
+      return state;
+  }
+};
 
+// const intialState = {
+//   user: null,
+// };
+
+export function AuthProvider({ children }) {
+  const [loading, setLoading] = useState(true);
+  const intialState = {
+    user: null,
+  };
+  const [currentUser, setCurrentUser] = useState("");
+  const [state, dispatch] = useReducer(reducer, intialState);
   const navigate = useNavigate();
 
   function signup(email, password) {
@@ -35,21 +53,26 @@ export function AuthProvider({ children }) {
     return auth.sendPasswordResetEmail(email);
   }
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      setCurrentUser(user);
-      setLoading(false);
-    });
+  const unsubscribe = () => {
+  auth.onAuthStateChanged((user) => {
+    setCurrentUser(user);
+    setLoading(false);
+  })
 
-    return unsubscribe;
-  }, []);
+}
+;
+
+  useEffect(() => {
+    unsubscribe();
+    }, 
+    []);
 
   const value = {
-    currentUser,
     login,
     signup,
     logout,
     resetPassword,
+    currentUser,
   };
 
   return (
@@ -57,4 +80,6 @@ export function AuthProvider({ children }) {
       {!loading && children}
     </AuthContext.Provider>
   );
-}
+  }
+
+export {AuthContext}
