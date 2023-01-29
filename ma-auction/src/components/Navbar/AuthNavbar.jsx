@@ -5,11 +5,11 @@ import './AuthNavbar.css';
 import Bmw from "../../images/bmw-logo-svgrepo-com.svg";
 import { useAuth } from '../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
-// Game Icons
-export default function AuthNavbar() {
+// pass user object to display user email on navbar after authentication
+export default function AuthNavbar({user}) {
     
 
-const {currentUser, logout } = useAuth();
+const {logout, currentUser } = useAuth();
 
 
 const navigate = useNavigate();
@@ -64,13 +64,14 @@ const navigate = useNavigate();
       </button>
       </div>
     
-}{
-  currentUser && <button onClick={() =>logout()}>Logout</button>
+}:
+{
+  currentUser && <button onClick={() =>logout()}>Logout {currentUser.email}</button>
 }
        
         </div>
         <div className='navbar-input-wrapper'>
-        
+        <button onClick={() => navigate("/cars/1")}>Check Inventory</button>
         </div>
      
         <div className='navbar-user-options'>

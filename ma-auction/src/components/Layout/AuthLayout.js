@@ -8,7 +8,7 @@ import { AuthProvider, useAuth } from "../../contexts/AuthContext";
 
 /**
  * Layout page for the various pages of the application
- * @author Aldrich Reboja
+ * @author Mohamad Alhaddad
  * @returns
  */
 export default function AuthLayout({ children }) {
@@ -20,6 +20,7 @@ export default function AuthLayout({ children }) {
     return (
       <AuthProvider>
         <div className="layout-container">
+               {/* set CurrentUser to useAuth hook from authContext*/}
           <AuthNavbar user={currentUser} />
           <div className="layout-main">
             <div className="right-pane">
