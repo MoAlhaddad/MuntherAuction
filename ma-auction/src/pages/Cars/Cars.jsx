@@ -5,17 +5,19 @@ import axios from "axios";
 const Cars = () => {
 
   const [cars, setCars] = useState([]);
-
+  // axios = axios.create({ baseURL: process.env.REACT_APP_API_URL });
+  //REACT_APP_API_TOKEN
   useEffect(() => {
     const fetchData = async  () =>{
     try{
-      const data = await axios.get(process.env.REACT_APP_API_URL + "/api/cars",  
+      const data = await axios.get(process.env.REACT_APP_API_URL + "/api/cars", 
+     { 
+      headers: {
+        Authorization:
+        "bearer "
+ + process.env.REACT_APP_API_TOKEN   },
+     }
       
-       headers:  {  Authorization: "bearer " + process.env.STRAPI_APIKEY
-        
-        },
-      
-    
       );
       setCars(data);
       console.log(cars)
